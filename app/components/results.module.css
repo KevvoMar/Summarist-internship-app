@@ -1,0 +1,75 @@
+.results {
+  width: 440px;
+  max-height: 640px;
+  overflow-y: scroll;
+  background-color: #fff;
+  padding: 16px;
+  box-shadow: 0 0 4 0;
+  top: 112px;
+  right: 64px;
+  position: fixed;
+  z-index: 100;
+}
+
+.link {
+  height: 120px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  border-bottom: 1px solid #d9dde0;
+}
+
+.link:last-child {
+  border-bottom: none;
+}
+
+.link:hover {
+  background-color: #ebeff0;
+}
+
+.book__img {
+  width: 80px;
+  height: 80px;
+}
+
+.book__title {
+  color: #032B41;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.book__author {
+  color: #6B757B;
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.book__time {
+  display: flex;
+  color: #6B757B;
+  align-items: center;
+}
+
+.clock {
+  font-size: 16px;
+  margin-right: 4px;
+}
+
+.book__duration {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.no__results {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .results {
+    width: 100%;
+    right: 0;
+  }
+}

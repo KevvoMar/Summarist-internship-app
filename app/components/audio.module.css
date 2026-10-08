@@ -1,0 +1,144 @@
+.audio__player {
+  width: 100%;
+  height: 80px;
+  background: #042330;
+  display: flex;
+  padding: 0 40px;
+  align-items: center;
+}
+
+.audio__description {
+  width: 33.33%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.audio__img {
+  width: 48px;
+  height: 48px;
+}
+
+.audio__bookDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px
+}
+
+.audio__title {
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.audio__author {
+  color: #BAC8CE;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.audio__controls {
+  width: 33.33%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  color: #FFF;
+}
+
+.audio__backwardTen,
+.audio__forwardTen {
+  font-size: 28px;
+  color: #FFFFFF;
+}
+
+.audio__play,
+.audio__pause {
+  font-size: 48px;
+  color: #FFFFFF;
+  margin-top: 8px;
+}
+
+.audio__duration {
+  width: 33.33%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.audio__played,
+.audio__left {
+  font-size: 14px;
+  color: #fff;
+}
+
+.audio__bar {
+  position: relative;
+  height: 4px;
+  background: gray;
+  border-radius: 4px;
+  overflow: visible;
+  width: 100%;
+}
+
+.audio__slider {
+  width: 100%;
+  appearance: none;
+  height: 4px;
+  background: gray;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+.audio__slider::-webkit-slider-runnable-track {
+  height: 4px;
+  background: gray;
+  border-radius: 4px;
+}
+
+.audio__slider::-moz-range-track {
+  height: 4px;
+  background: gray;
+  border-radius: 4px;
+}
+
+.audio__slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-radius: 50%;
+  margin-top: -5px;
+  cursor: pointer;
+}
+
+.audio__slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.audio__slider::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to right,
+    #2BD97C var(--progress-percent),
+    gray var(--progress-percent)
+  );
+}
+
+@media (max-width: 768px) {
+    .audio__player {
+    flex-direction: column;
+    padding: 16px 80px;
+    height: 180px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .audio__description, .audio__controls, .audio__duration {
+    width: 100%;
+  }
+}

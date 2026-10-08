@@ -1,0 +1,55 @@
+.settings {
+  display: flex;
+  flex-direction: column;
+    color: #032B41;
+}
+
+.settings__title {
+  font-size: 32px;
+  font-weight: bold;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e1e7ea;
+  margin-bottom: 32px;
+}
+
+.subscription {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e1e7ea;
+  margin-bottom: 32px;
+}
+
+.settings__subtitle {
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 4px;
+}
+
+.settings__p {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.logged__out {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login__imgWrapper {
+  max-width: 460px;
+}
+
+.login__img {
+  width: 460px;
+}
+
+.settings__login {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.login__btn, .upgrade__btn {
+  max-width: 180px;
+  margin-bottom: 8px;
+}

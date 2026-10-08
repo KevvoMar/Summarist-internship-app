@@ -1,0 +1,151 @@
+.library__title {
+  color: #032B41;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.number__ofItems {
+  color: #394547;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+.zero__wrapper {
+  background-color: #F1F6F4;
+  border-radius: 16px;
+  padding: 32px;
+  margin: 0 auto;
+  margin-bottom: 56px;
+  text-align: center;
+  max-width: max-content;
+}
+
+.zero__title {
+  color: #042330;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.zero__p {
+  color: #394547;
+  font-size: 16px;
+}
+
+.saved, .finished {
+  padding-right: 32px;
+}
+
+.saved__book:hover, .finished__book:hover {
+  border-radius: 4px;
+  background-color: #ebeff0;
+}
+
+.saved__wrapper, .finished__wrapper {
+  display: flex;
+  scroll-behavior: smooth;
+  overflow-x: auto;        
+  overflow-y: hidden;
+  gap: 16px;
+  max-width: 100%;
+  box-sizing: border-box; 
+  scrollbar-width: thin;
+}
+
+.saved__wrapper::-webkit-scrollbar,
+.finished__wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.saved__book, .finished__book {
+  position: relative;
+  margin-right: 16px;
+  padding: 32px 12px 12px;
+  width: 200px;
+}
+
+.saved__img, .finished__img {
+  width: 172px;
+}
+
+.saved__title, .finished__title {
+  color: #032B41;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+.saved__author, .finished__author {
+  color: #6B757B;
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.saved__subtitle, .finished__subtitle {
+  color: #394547;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.saved__details, .finished__details {
+  display: flex;
+  color: #6B757B;
+  align-items: center;
+}
+
+.clock, .star {
+  font-size: 16px;
+  margin-right: 4px;
+}
+
+.saved__duration, .finished__duration,
+.saved__rating, .finished__rating {
+    font-size: 14px;
+    margin-right: 8px;
+    font-weight: 300;
+}
+
+.premium {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #032B41;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 400;
+  padding: 4px 10px;
+  border-radius: 24px;
+  z-index: 10;
+}
+
+.img__wrapper {
+  position: relative;
+  width: 172px;
+  height: 172px;
+}
+
+.logged__out {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login__imgWrapper {
+  max-width: 460px;
+}
+
+.login__img {
+  width: 460px;
+}
+
+.library__login {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.login__btn {
+  max-width: 180px;
+  margin-bottom: 8px;
+}

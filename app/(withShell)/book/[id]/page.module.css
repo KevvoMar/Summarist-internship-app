@@ -1,0 +1,183 @@
+.book__wrapper {
+  display: flex;
+  align-items: start;
+  flex-direction: row-reverse;
+  color: #032B41;
+}
+
+.img__wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.book__information {
+  margin: 0 16px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.book__img {
+  width: 300px;
+}
+
+.book__title {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.book__author {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.book__subtitle {
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+
+.book__details {
+  padding: 16px 0;
+  margin-bottom: 24px;
+  border-top: 1px solid #e1e7ea;
+  border-bottom: 1px solid #e1e7ea;
+}
+
+.details__list {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 400px;
+}
+
+.book__detail {
+  width: 200px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.detail__icon {
+  font-size: 24px;
+  margin-right: 4px;
+}
+
+.detail__text {
+  font-size: 14;
+}
+
+.book__btnsWrapper {
+  margin-bottom: 24px;
+  display: flex;
+}
+
+.book__btn {
+  background-color: #032B41;
+  border-radius: 4px;
+  color: #fff;
+  font-size:16px;
+  width: 144px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  transition: opacity 200ms;
+}
+
+.book__btn:hover {
+  opacity: 0.8;
+}
+
+.book__btnIcon {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
+.book__mark {
+  display: flex;
+  margin-bottom: 40px;
+  color:#0365F2;
+  cursor: pointer;
+  transition: color 300ms;
+}
+
+.book__mark:hover {
+  color: #024db6;
+}
+
+.book__markIcon {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
+.book__markText {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.book__infoTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.book__tagsWrapper {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.book__tag {
+  background-color: #F1F6F4;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0 16px;
+  margin-right: 12px;
+  height: 48px;
+  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+}
+
+.book__info {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 16px;;
+}
+
+@media (max-width: 768px) {
+  .book__wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .book__information {
+    margin: 40px 0 0 0;
+  }
+  
+  .book__title {
+    font-size: 24px;
+  }
+
+  .book__author {
+    font-size: 14px;
+  }
+
+  .book__subtitle {
+    font-size: 18px;
+  }
+
+  .book__markText {
+    font-size: 16px;
+  }
+
+  .book__tag {
+    font-size: 14px;
+  }
+
+  .book__info {
+    font-size: 14px;
+  }
+}

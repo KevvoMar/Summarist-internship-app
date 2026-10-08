@@ -1,0 +1,104 @@
+.sidebar {
+  height: 100%;
+}
+
+.open {
+  height: 100%;
+}
+
+.side__wrapper {
+  background-color: #f7faf9;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ecf1ef;
+  transition: all 300ms;
+  flex-shrink: 0;
+}
+
+.side__imgMask {
+  margin: 16px auto;
+}
+
+.side__img {
+  width: 160px;
+  height: 40px;
+}
+
+.clickable:hover {
+  background-color: #ecf1ef;
+  cursor: pointer;
+}
+
+.not__clickable:hover {
+  cursor: not-allowed;
+}
+
+.side__item {
+  color: #032B41;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.side__icon {
+  font-size: 28px;
+  margin-right: 8px;
+}
+
+.item__name {
+  font-size: 16px;
+}
+
+.active__line {
+  background-color: transparent;
+  padding: 30px 2px;
+  margin-right: 16px;
+}
+
+.active__line.active {
+  background-color: #2BD97C;
+}
+
+.side__listTop {
+  margin-top: 32px;
+}
+
+.side__listBottom {
+  margin-top: auto;
+  margin-bottom: 32px;
+}
+
+.fontSizeController {
+  display: flex;
+  margin-left: 24px;
+  align-items: center;
+}
+
+.size__s {
+  font-size: 20px;
+  margin-right: 8px;
+  cursor: pointer; 
+}
+
+.size__m {
+  font-size: 24px;
+  margin-right: 8px;
+  cursor: pointer; 
+}
+
+.size__l {
+  font-size: 28px;
+  margin-right: 8px;
+  cursor: pointer; 
+}
+
+.size__xl {
+  font-size: 32px;
+  cursor: pointer; 
+}
+
+.size__button.selected {
+  border-bottom: 3px solid #2BD97C;
+}
