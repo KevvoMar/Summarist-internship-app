@@ -1,39 +1,41 @@
 "use client";
 
-// 1. Import your custom strongly-typed Redux hooks and action
+// 1. Import Suspense from React to fix the prerender build block
+import { Suspense, useState, useEffect } from "react";
+
+// Import your custom strongly-typed Redux hooks and action
 import { useAppSelector, useAppDispatch } from "@/app/redux/hooks";
 import { updateSubscriptionStatus } from "@/app/redux/authSlice";
 
-
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import Login from "../../components/login";
 import styles from "./page.module.css";
 
-// 2. Import routing mechanisms and your local Firebase setup configuration
+// Import routing mechanisms and your local Firebase setup configuration
 import { useSearchParams, useRouter } from "next/navigation";
-import { db } from "../../firebase"; // Double check that this folder path accurately targets your firebase config!
+import { db } from "../../firebase"; 
 import { doc, updateDoc } from "firebase/firestore";
 
-export default function Settings() {
+// --- CORE SETTINGS INTERNAL LAYOUT ---
+function SettingsContent() {
   const user = useAppSelector((state) => state.auth.user);
-  const dispatch = useAppDispatch(); // Initialize your custom type-safe dispatch mechanism
+  const dispatch = useAppDispatch(); 
   
   const [showLogin, setShowLogin] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // 3. Initialize the search parameter catcher and clean router mechanisms
+  // Initialize the search parameter catcher and clean router mechanisms
   const searchParams = useSearchParams();
   const router = useRouter();
   const planParam = searchParams.get("plan");
 
-  // 4. Keep your normal skeleton loading animation delay mechanism
+  // Keep your normal skeleton loading animation delay mechanism
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 600);
     return () => clearTimeout(timer);
   }, []);
 
-  // 5. MODIFIED EFFECT: Updates Cloud Firestore AND dispatches straight to Redux memory instantly
+  // MODIFIED EFFECT: Updates Cloud Firestore AND dispatches straight to Redux memory instantly
   useEffect(() => {
     async function handleSuccessfulPayment() {
       // If a plan parameter exists in the URL and a user is logged in
@@ -64,26 +66,7 @@ export default function Settings() {
   }, [planParam, user?.uid, router, dispatch]);
     
   if (loading) {
-    return (
-      <div className="container">
-        <div className="row">
-          <div style={{ width: "100%", padding: "20px", display: "flex", flexDirection: "column" }}>
-            <div
-              className="skeleton"
-              style={{ width: "160px", height: "32px", marginBottom: "60px" }}
-            ></div>
-            <div
-              className="skeleton"
-              style={{ width: "240px", height: "100px", marginBottom: "30px" }}
-            ></div>
-            <div
-              className="skeleton"
-              style={{ width: "240px", height: "100px", marginBottom: "30px" }}
-            ></div>
-          </div>
-        </div>
-      </div>
-    );
+    return <SettingsSkeleton />;
   }
 
   return (
@@ -141,5 +124,38 @@ export default function Settings() {
         </div>
       </div>
     </div>
+  );
+}
+
+// --- REUSABLE SKELETON LAYOUT COMPONENT ---
+function SettingsSkeleton() {
+  return (
+    <div className="container">
+      <div className="row">
+        <div style={{ width: "100%", padding: "20px", display: "flex", flexDirection: "column" }}>
+          <div
+            className="skeleton"
+            style={{ width: "160px", height: "32px", marginBottom: "60px" }}
+          ></div>
+          <div
+            className="skeleton"
+            style={{ width: "240px", height: "100px", marginBottom: "30px" }}
+          ></div>
+          <div
+            className="skeleton"
+            style={{ width: "240px", height: "100px", marginBottom: "30px" }}
+          ></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// --- MASTER EXPORT WITH SUSPENSE WRAPPER ---
+export default function Settings() {
+  return (
+    <Suspense fallback={<SettingsSkeleton />}>
+      <SettingsContent />
+    </Suspense>
   );
 }
