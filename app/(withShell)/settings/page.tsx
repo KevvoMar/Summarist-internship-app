@@ -1,33 +1,39 @@
 "use client";
 
-import { useAppSelector } from "@/app/redux/hooks";
+// 1. Import your custom strongly-typed Redux hooks and action
+import { useAppSelector, useAppDispatch } from "@/app/redux/hooks";
+import { updateSubscriptionStatus } from "@/app/redux/authSlice";
+
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Login from "../../components/login";
 import styles from "./page.module.css";
 
-// 1. Import routing mechanisms and your local Firebase setup configuration
+// 2. Import routing mechanisms and your local Firebase setup configuration
 import { useSearchParams, useRouter } from "next/navigation";
 import { db } from "../../firebase"; // Double check that this folder path accurately targets your firebase config!
 import { doc, updateDoc } from "firebase/firestore";
 
 export default function Settings() {
   const user = useAppSelector((state) => state.auth.user);
+  const dispatch = useAppDispatch(); // Initialize your custom type-safe dispatch mechanism
+  
   const [showLogin, setShowLogin] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // 2. Initialize the search parameter catcher and clean router mechanisms
+  // 3. Initialize the search parameter catcher and clean router mechanisms
   const searchParams = useSearchParams();
   const router = useRouter();
   const planParam = searchParams.get("plan");
 
-  // 3. Keep your normal skeleton loading animation delay mechanism
+  // 4. Keep your normal skeleton loading animation delay mechanism
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 600);
     return () => clearTimeout(timer);
   }, []);
 
-  // 4. NEW EFFECT: Captures incoming Stripe success triggers and records them into Firestore
+  // 5. MODIFIED EFFECT: Updates Cloud Firestore AND dispatches straight to Redux memory instantly
   useEffect(() => {
     async function handleSuccessfulPayment() {
       // If a plan parameter exists in the URL and a user is logged in
@@ -35,11 +41,14 @@ export default function Settings() {
         try {
           const userRef = doc(db, "users", user.uid);
           
-          // Save the premium tier update status back to the user's specific document account profile
+          // A. Save the premium tier update status back to the user's Firestore document
           await updateDoc(userRef, {
             subscriptionPlan: "Premium",
             planType: planParam,
           });
+
+          // B. Dispatch to Redux memory instantly so your UI text updates dynamically right now!
+          dispatch(updateSubscriptionStatus("Premium"));
 
           alert("Success! Your subscription status has updated to Premium.");
           
@@ -52,7 +61,7 @@ export default function Settings() {
     }
 
     handleSuccessfulPayment();
-  }, [planParam, user?.uid, router]);
+  }, [planParam, user?.uid, router, dispatch]);
     
   if (loading) {
     return (

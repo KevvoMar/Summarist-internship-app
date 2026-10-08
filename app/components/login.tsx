@@ -31,21 +31,21 @@ export default function Login({ onClose, origin }: { onClose: () => void, origin
   const router = useRouter();
   const provider = new GoogleAuthProvider();
 
-async function ensureUserDocument(user: User) {
-  if (user.uid === "guest") return;
+  async function ensureUserDocument(user: User) {
+    if (user.uid === "guest") return;
 
-  const userRef = doc(db, "users", user.uid);
-  const snap = await getDoc(userRef);
+    const userRef = doc(db, "users", user.uid);
+    const snap = await getDoc(userRef);
 
-  if (!snap.exists()) {
-    await setDoc(userRef, {
-      email: user.email,
-      subscriptionPlan: "Basic",
-      librarySaved: [],
-      libraryFinished: []
-    });
+    if (!snap.exists()) {
+      await setDoc(userRef, {
+        email: user.email,
+        subscriptionPlan: "Basic",
+        librarySaved: [],
+        libraryFinished: []
+      });
+    }
   }
-}
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -74,9 +74,9 @@ async function ensureUserDocument(user: User) {
           }
         }, 300);
       })
-      .catch((error) => {
-        console.error("Error signing in:", error.code, error.message);
-        setErrorMsg(error.message); 
+      .catch((error: any) => {
+        console.error("Error signing in:", error?.code, error);
+        setErrorMsg(error?.message || "Invalid email or password."); 
         setLoading(false);
       });
   };
@@ -91,10 +91,10 @@ async function ensureUserDocument(user: User) {
 
       if (origin === "/") {
         router.push("/for-you");
-      } else {
-        router.refresh();
-      }
-    }, 1200);
+          } else {
+            router.refresh();
+          }
+        }, 1200);
   };
 
   const handleGoogleLogin = () => {
@@ -118,9 +118,10 @@ async function ensureUserDocument(user: User) {
           }
         }, 300);
       })
-      .catch((error) => {
-        console.error("Google sign-in failed:", error.message);
-        setErrorMsg(error.message);
+      .catch((error: any) => {
+        // FIXED: Using a safe string fallback so missing parameters don't crash compilation
+        console.error("Google sign-in failed:", error);
+        setErrorMsg(error?.message || "Google authentication failed. Please try again.");
         setGoogleLoading(false);
       });
   };
@@ -139,12 +140,12 @@ async function ensureUserDocument(user: User) {
           router.push("/for-you");
         }, 300);
       })
-      .catch((error) => {
-        console.error("Sign-up error:", error.code, error.message);
-        const errorCode = error.code;
-        setErrorMsg(error.message);
+      .catch((error: any) => {
+        console.error("Sign-up error:", error?.code, error);
+        setErrorMsg(error?.message || "Account creation failed. Please check your data.");
+        setLoading(false);
       });
-  }
+  };
 
   const handleResetPassword = () => {
     setLoading(true);
@@ -153,10 +154,11 @@ async function ensureUserDocument(user: User) {
     sendPasswordResetEmail(auth, email)
       .then(() => {
         setErrorMsg("Password reset link sent to your email.");
-        setLoading(false);
+        setLoading(false)
       })
-      .catch((error) => {
-        setErrorMsg(error.message);
+      .catch((error: any) => {
+        console.error("Reset error:", error);
+        setErrorMsg(error?.message || "Failed to dispatch password recovery mail.");
         setLoading(false);
       });
   };
@@ -287,25 +289,39 @@ async function ensureUserDocument(user: User) {
           </Link>
         )}
 
+        {isForgotPassword && (
+          <Link
+            href=""
+            className={`${styles.auth__link} ${styles.forgot__password}`}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsForgotPassword(false);
+              setIsSignup(false);
+            }}
+          >
+            Back to login
+          </Link>
+        )}
+
         <Link
           href=""
-          className={`${styles.auth__link} ${styles.no__account}`}
+          className={styles.auth__link}
           onClick={(e) => {
-              e.preventDefault();
-              if (isForgotPassword) {
-                setIsForgotPassword(false);
-                return;
-              }
-              if (isSignup) {
-                setIsSignup(false);
-                return;
-              }
+            e.preventDefault();
+            if (isForgotPassword) {
+              setIsForgotPassword(false);
               setIsSignup(true);
-            }}
+            } else {
+              setIsSignup(!isSignup);
+            }
+            setErrorMsg("");
+          }}
         >
-          {isForgotPassword? "Go to login": 
-            isSignup? "Already have an account?": 
-            "Don't have an account?"}
+          {isForgotPassword 
+            ? "Don't have an account? Sign up" 
+            : isSignup 
+              ? "Already have an account? Login" 
+              : "Don't have an account? Sign up"}
         </Link>
       </div>
     </div>

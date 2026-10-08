@@ -32,6 +32,12 @@ const authSlice = createSlice({
     clearUser: (state) => {
       state.user = null;
     },
+    // NEW REDUCER ACTION: Instantly sets your memory state to matching status properties
+    updateSubscriptionStatus: (state, action) => {
+      if (state.user) {
+        state.user.subscriptionPlan = action.payload; // Updates to "Premium" dynamically
+      }
+    },
     updateLibrarySaved: (state, action) => {
       const { type, book } = action.payload;
       if (!state.user) return;
@@ -67,6 +73,7 @@ const authSlice = createSlice({
 export const {
   setUser,
   clearUser,
+  updateSubscriptionStatus, // Exporting your new sub-updater
   updateLibrarySaved,
   updateLibraryFinished,
 } = authSlice.actions;

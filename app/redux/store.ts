@@ -12,3 +12,5 @@ export const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof store.getState>;
+// NEW TYPE EXPORT: Add this so your dispatch hook understands your store actions
+export type AppDispatch = typeof store.dispatch;

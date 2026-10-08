@@ -4,15 +4,15 @@ import { initializeApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
+// Read from system environment configurations dynamically
 const firebaseConfig = {
-  apiKey: "AIzaSyAGtxqZDK2BYM-smsb_ois6SU-I-vsz0qg",
-  authDomain: "summarist-47c54.firebaseapp.com",
-  projectId: "summarist-47c54",
-  storageBucket: "summarist-47c54.firebasestorage.app",
-  messagingSenderId: "809664629707",
-  appId: "1:809664629707:web:c8b114f14ab6f511e5444e",
-  measurementId: "G-MP22JHE7JZ"
-};
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
+}; 
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
 
